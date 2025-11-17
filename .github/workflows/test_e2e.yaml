@@ -1,0 +1,28 @@
+name: CI Tests E2E - Pull Request
+
+on:
+  pull_request:
+
+jobs:
+  testing_pr_e2e:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.13"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+
+      - name: Run Tests on Main Package
+        run: make test
+        env:
+            POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
+            POSTHOG_ENDPOINT: ${{ secrets.POSTHOG_ENDPOINT }}
+        
