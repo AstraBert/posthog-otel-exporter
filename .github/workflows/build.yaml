@@ -16,4 +16,4 @@ jobs:
         run: uv python install 3.13
 
       - name: Build package
-        run: uv build
+        run: make build

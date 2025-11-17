@@ -21,3 +21,7 @@ format-check:
 typecheck:
 	$(info ****************** type checking ******************)
 	uv run mypy src/posthog_otel_exporter/
+
+build:
+	$(info ****************** building ******************)
+	uv build
